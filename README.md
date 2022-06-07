@@ -37,4 +37,4 @@ I installed prisma typescript.
 next-auth
 add the the important schemeas for next.auth
 ran npx prisma migrate dev --name init
-
+npx prisma generate
