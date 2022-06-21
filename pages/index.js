@@ -1,27 +1,19 @@
-import { signIn, signOut, useSession } from 'next-auth/react'
-import Link from 'next/link'
-export default function Home() {
-  const { data: session } = useSession();
+import {useSession, signIn, signOut} from 'next-auth/react';
 
-  <div className="mt-8">
-  {session?.user ? (
-    <div>
-      <p>
-        Signed in as <strong>{session.user.email}</strong>
-        <button
-              onClick={signOut}
-              className="font-semibold underline opacity-70 hover:opacity-100"
-            >
-              Sign Out
-            </button>
-      </p>
-    </div>
-  ) : (
-    <Link href="/api/auth/signin">
-      <a className="px-6 py-3 rounded-md text-lg text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 transition">
-        Get started
-      </a>
-    </Link>
- )}
- </div>
+export default function Component() {
+  const {data: session} = useSession();
+  if (session) {
+    return (
+      <>
+        Signed in as {session.user.email} <br />
+        <button onClick={() => signOut()}>Sign out</button>
+      </>
+    );
+  }
+  return (
+    <>
+      Not signed in <br />
+      <button onClick={() => signIn()}>Sign in</button>
+    </>
+  );
 }
